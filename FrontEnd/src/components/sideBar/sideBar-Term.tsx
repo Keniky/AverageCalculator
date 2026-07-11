@@ -1,23 +1,22 @@
-import { useState } from "react";
 import type { SingleTermProps } from "../../hooks/useTerms";
+import { useId } from "../../hooks/useId";
 
 type props = {
     term:SingleTermProps,
-    currentId: string,
-    setCurrentId: React.Dispatch<React.SetStateAction<string>>,
 }
 
-function SideBarTerm({term, currentId, setCurrentId}:props){
+function SideBarTerm({term}:props){
+    const {id, setId} = useId();
 
     const changeStateOfClicked = () => {
-        setCurrentId(term.id)
+        setId(term.id)
     }
 
   return (
     <span 
         key={term.id}
         onClick={changeStateOfClicked}
-        className={`${ currentId === term.id ? " bg-red-300 ": "bg-blue-700"} 
+        className={`${ id === term.id ? " bg-red-300 ": "bg-blue-700"} 
                         px-4 py-1 m-1 select-none`}
         >
         {term.name}

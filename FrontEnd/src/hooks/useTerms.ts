@@ -21,22 +21,10 @@ async function getTerms() : Promise<TermProps>{
                 {
                     id:'1',
                     name:'1er Anne LMD',
-                    modules:[
-                        {name:'Alco', td:true, exam:true},
-                        {name:'Anal', td:true, exam:true},
-                        {name:'Alg', td:true, exam:true},
-                        {name:'Idk', td:true, exam:true},
-                    ]
                 },
                 {
                     id:'2',
                     name:'2eme Anne LMD',
-                    modules:[
-                        {name:'Alco', td:true, exam:true},
-                        {name:'Anal', td:true, exam:true},
-                        {name:'Alg', td:true, exam:true},
-                        {name:'Idk', td:true, exam:true},
-                    ]
                 },
             ],
         }
@@ -44,16 +32,25 @@ async function getTerms() : Promise<TermProps>{
     }
 }
 
-export interface ModuleProps{
+                    // modules:[
+                    //     {name:'Alco', td:true, exam:true},
+                    //     {name:'Anal', td:true, exam:true},
+                    //     {name:'Alg', td:true, exam:true},
+                    //     {name:'Idk', td:true, exam:true},
+                    // ]
+export interface SingleModuleProps{
     name: string,
     td: boolean,
     exam: boolean,
+    cof: number,
+}
+export interface ModuleProps{
+    modules: SingleModuleProps[];
 }
 
 export interface SingleTermProps{
     id: string,
     name: string,
-    modules: ModuleProps[],
 }
 
 export interface TermProps{

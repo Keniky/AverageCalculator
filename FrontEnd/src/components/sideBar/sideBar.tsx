@@ -1,13 +1,9 @@
-import { useState } from "react";
-import { useTerms, type TermProps } from "../../hooks/useTerms"
+import { useTerms } from "../../hooks/useTerms"
 import SideBarTerm from "./sideBar-Term";
 
 const SideBar = () => {
 
     const {data : terms}= useTerms();
-    const [currentId, setCurrentId] = useState('')
-
-    console.log(terms)
   return (
     <section className='flex flex-col items-center bg-amber-700 px-15 py-5'>
         <div>
@@ -19,13 +15,11 @@ const SideBar = () => {
         </div>
         <div className='flex flex-col '>
             {terms?.terms.map((term) => (
-                <SideBarTerm term={term} currentId={currentId} setCurrentId={setCurrentId}></SideBarTerm>
+                <SideBarTerm term={term}></SideBarTerm>
             ))}
         </div>
     </section>
   )
 }
 
-         <div className="flex flex-col">
-      </div>
 export default SideBar
