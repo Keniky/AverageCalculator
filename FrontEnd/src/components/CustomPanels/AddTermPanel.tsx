@@ -2,10 +2,12 @@ import { useEffect, useMemo, useState } from "react"
 import { AddTermPanelTextInput } from "./AddTermPanel-TextInput";
 import { AddTermPanelModuleInput } from "./AddTermPanel-ModuleInput";
 import type { SingleModuleProps } from "../../hooks/useTerms";
+import { toast } from "sonner";
 
 const AddTermPanel = () => {
     const [termName, setTermName] = useState('');
     const [arrayOfModules, setArrayOfModules] = useState<SingleModuleProps[]>([])
+
 
     const numberOfDisplayedModules = useMemo(() => { 
       return arrayOfModules?.length + 1
@@ -19,20 +21,47 @@ const AddTermPanel = () => {
 
 
     async function submitForm(e: React.FormEvent<HTMLFormElement>){
-      e.preventDefault()
+        e.preventDefault()
+
+        try{
+
+          const response = await fetch('http://localhost:8000/terms',{
+            method: "POST",
+          });
+          
+          if(!response.ok){
+            toast.error('failed to post term')
+          }
+
+          toast.success(' posting data succeded ')
+        }catch{
+          toast.error('failed to post term')
+        }
     }
+
   return ( 
     <div className="absolute inset-0 flex items-center justify-center 
      bg-black/10 backdrop-blur-sm transition-opacity duration-500
+    text-black font-bold 
      ">
         <div className="overflow-scroll bg-zinc-300 w-192 h-160 rounded-lg shadow-2xl">
-          <form onSubmit={submitForm}>
+          <form 
+            className="flex flex-col"
+            onSubmit={submitForm}
+          >
             <AddTermPanelTextInput labelName="Term Input" data={termName} setData={setTermName}/>
             {
               Array.from({length: numberOfDisplayedModules}).map(() => (
                 <AddTermPanelModuleInput  setArrayOfModules={setArrayOfModules}/>
               ))
             }
+            <button 
+              className="border border-black border-1 p-1 rounded-lg bg-green-500 flex self-center"
+              type="submit"
+            >
+              Confirm
+            </button>
+
           </form>
         </div>
     </div>

@@ -3,6 +3,7 @@ import UpperBar from './components/upperBar'
 import AverageCalc from './components/AverageCalc'
 import { IdContext } from './hooks/useId'
 import { useState } from 'react';
+import { Toaster } from 'sonner';
 
 
 function App() {
@@ -11,6 +12,7 @@ function App() {
 
   return (
     <IdContext.Provider value={{ id, setId }}>
+      <Toaster/>
       <main className='
               h-[100vh] flex flex-col  sm:max-w-[40rem]
               md:max-w-[60rem] lg:max-w-full

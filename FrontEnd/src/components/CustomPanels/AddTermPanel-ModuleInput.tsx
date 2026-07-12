@@ -27,7 +27,7 @@ export function AddTermPanelModuleInput({setArrayOfModules}: AddTermPanelModuleI
     }
 
    return (
-    <div className="flex flex-row items-center text-black font-bold my-2 mx-4 justify-center">
+    <div className="flex flex-row items-center my-2 mx-4 justify-center">
 
         <div className="flex flex-col mx-2">
             <label
