@@ -13,7 +13,9 @@ export function AddTermPanelModuleInput({setArrayOfModules}: AddTermPanelModuleI
     const [exam, setExam] = useState(false)
     const [coff, setCoff] = useState('1')
 
-    function AddModule(){
+    function AddModule(e: React.FormEvent<HTMLFormElement>){
+        e.preventDefault()
+
         const cof = parseInt(coff)
         const singleModule: SingleModuleProps = {name, td, exam, cof};
         setArrayOfModules(prev => {

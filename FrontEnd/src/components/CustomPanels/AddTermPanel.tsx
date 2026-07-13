@@ -27,19 +27,28 @@ const AddTermPanel = ({setIsAddPanel}:AddTermPanelPros) => {
     async function submitForm(e: React.FormEvent<HTMLFormElement>){
         e.preventDefault()
 
+        console.log(arrayOfModules)
         try{
-
           const response = await fetch('http://localhost:8000/terms',{
             method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              name:termName,
+              modules:arrayOfModules,
+            }),
           });
           
           if(!response.ok){
-            toast.error('failed to post term')
+            throw new Error('failed to post term')
           }
 
           toast.success(' posting data succeded ')
         }catch{
           toast.error('failed to post term')
+        }finally{
+          setIsAddPanel(false)
         }
     }
 
