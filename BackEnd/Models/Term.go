@@ -1,13 +1,13 @@
 package models
 
 type Term struct {
-	ID      string   `json:"id"`
+	ID      string
 	Name    string   `json:"name"`
-	Modules []Module `json:"modules.omitempty"`
+	Modules []Module `json:"modules"`
 }
 
 type Module struct {
-	ID     string `json:"id"`
+	ID     string
 	Name   string `json:"name"`
 	TD     bool   `json:"td"`
 	Exam   bool   `json:"exam"`
