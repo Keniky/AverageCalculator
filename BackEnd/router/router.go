@@ -1,13 +1,14 @@
 package router
 
 import (
+	"database/sql"
 	"net/http"
 )
 
-func New() *http.ServeMux {
+func New(db *sql.DB) *http.ServeMux {
 	mux := http.NewServeMux()
 
-	TermHandler := NewTermHandler()
+	TermHandler := NewTermHandler(db)
 
 	mux.HandleFunc("GET /terms", TermHandler.GetTerms)
 	mux.HandleFunc("POST /terms", TermHandler.CreateTerms)
