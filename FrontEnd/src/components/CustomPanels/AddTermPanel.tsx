@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react"
 import { AddTermPanelTextInput } from "./AddTermPanel-TextInput";
 import { AddTermPanelModuleInput } from "./AddTermPanel-ModuleInput";
-import type { SingleModuleProps } from "../../hooks/useTerms";
+import { useMutateTerm, type SingleModuleProps } from "../../hooks/useTerms";
 import { toast } from "sonner";
 
 type AddTermPanelPros = {
@@ -11,6 +11,7 @@ type AddTermPanelPros = {
 const AddTermPanel = ({setIsAddPanel}:AddTermPanelPros) => {
     const [termName, setTermName] = useState('');
     const [arrayOfModules, setArrayOfModules] = useState<SingleModuleProps[]>([])
+    const {mutateAsync} = useMutateTerm();
 
 
     const numberOfDisplayedModules = useMemo(() => { 
@@ -29,17 +30,8 @@ const AddTermPanel = ({setIsAddPanel}:AddTermPanelPros) => {
 
         console.log(arrayOfModules)
         try{
-          const response = await fetch('http://localhost:8000/terms',{
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              name:termName,
-              modules:arrayOfModules,
-            }),
-          });
-          
+
+          const response = await mutateAsync({termName, modules: arrayOfModules})
           if(!response.ok){
             throw new Error('failed to post term')
           }

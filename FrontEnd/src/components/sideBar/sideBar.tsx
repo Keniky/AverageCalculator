@@ -17,7 +17,7 @@ const SideBar = () => {
                 shadow-lg transition-all: duration-300'
                 onClick={() => {setIsAddPanel(true)}}                
             > 
-                addSection 
+            Add Term
             </button>
         </div>
         <div className='flex flex-col '>

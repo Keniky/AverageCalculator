@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 
 async function getTerms() : Promise<SingleTermProps[]>{
@@ -22,12 +22,26 @@ async function getTerms() : Promise<SingleTermProps[]>{
     return []
 }
 
-                    // modules:[
-                    //     {name:'Alco', td:true, exam:true},
-                    //     {name:'Anal', td:true, exam:true},
-                    //     {name:'Alg', td:true, exam:true},
-                    //     {name:'Idk', td:true, exam:true},
-                    // ]
+type PostTermsProps = {
+    termName: string,
+    modules: SingleModuleProps[],
+}
+
+async function postTerms({termName, modules}:PostTermsProps): Promise<Response> {
+
+          const response = await fetch('http://localhost:8000/terms',{
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              name:termName,
+              modules:modules,
+            }),
+          });
+          return response
+}
+
 export interface SingleModuleProps{
     name: string,
     td: boolean,
@@ -52,4 +66,17 @@ export function useTerms() {
     gcTime: 10 * 60 * 1000, // 10 minutes
     retry: 2,
   });
+}
+
+export function useMutateTerm(){
+
+    const queryClient = useQueryClient();
+
+    return useMutation({
+        mutationFn: postTerms,
+        onSuccess: () => {
+            queryClient.invalidateQueries({queryKey: ['terms']})
+        }
+    });
+
 }
