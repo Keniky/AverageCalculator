@@ -1,7 +1,7 @@
 package models
 
 type Term struct {
-	ID      string
+	ID      string   `json:"id"`
 	Name    string   `json:"name"`
 	Modules []Module `json:"modules"`
 }

@@ -18,9 +18,26 @@ func NewTermHandler(db *sql.DB) *TermHandler {
 
 func (handler *TermHandler) GetTerms(w http.ResponseWriter, r *http.Request) {
 
-	fmt.Println("returning Terms")
+	row, err := handler.DB.Query(`SELECT id, name FROM term`)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	defer row.Close()
+	terms := []models.Term{}
+
+	for row.Next() {
+		var term models.Term
+		if err = row.Scan(&term.ID, &term.Name); err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+
+		terms = append(terms, term)
+	}
+
 	w.Header().Set("Content-Type", "application/json")
-	w.Write([]byte(`{"dawg": "dawg"}`))
+	json.NewEncoder(w).Encode(terms)
 }
 
 func (handler *TermHandler) CreateTerms(w http.ResponseWriter, r *http.Request) {

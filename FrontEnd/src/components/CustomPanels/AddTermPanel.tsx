@@ -4,7 +4,11 @@ import { AddTermPanelModuleInput } from "./AddTermPanel-ModuleInput";
 import type { SingleModuleProps } from "../../hooks/useTerms";
 import { toast } from "sonner";
 
-const AddTermPanel = () => {
+type AddTermPanelPros = {
+  setIsAddPanel: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+const AddTermPanel = ({setIsAddPanel}:AddTermPanelPros) => {
     const [termName, setTermName] = useState('');
     const [arrayOfModules, setArrayOfModules] = useState<SingleModuleProps[]>([])
 
@@ -55,14 +59,25 @@ const AddTermPanel = () => {
                 <AddTermPanelModuleInput  setArrayOfModules={setArrayOfModules}/>
               ))
             }
-            <button 
-              className="border border-black border-1 p-1 rounded-lg bg-green-500 flex self-center"
-              type="submit"
-            >
-              Confirm
-            </button>
+            <div className="p-1 flex self-center">
+              <button 
+                className="border border-black border-1 p-1 rounded-lg bg-green-500 flex self-center"
+                type="submit"
+                >
+                Confirm
+              </button>
+
+            </div>
 
           </form>
+              <button 
+                className="border border-black border-1 ml-3 p-1 rounded-lg bg-red-500 flex self-center"
+                onClick={() => {
+                  setIsAddPanel(false)
+                }}
+                >
+                Cancel
+              </button>
         </div>
     </div>
   )

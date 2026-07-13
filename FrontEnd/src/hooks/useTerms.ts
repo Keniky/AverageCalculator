@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
+import { toast } from "sonner";
 
-async function getTerms() : Promise<TermProps>{
+async function getTerms() : Promise<SingleTermProps[]>{
     try{
 
         const response = await fetch('http://localhost:8000/terms',{
@@ -11,25 +12,14 @@ async function getTerms() : Promise<TermProps>{
             throw new Error('Request Failed');            
         }
 
-        return await response.json();
+        const data = await response.json()
+        return data;
 
     }catch{
         console.log('failed lol ')
-        return ({
-
-            terms: [
-                {
-                    id:'1',
-                    name:'1er Anne LMD',
-                },
-                {
-                    id:'2',
-                    name:'2eme Anne LMD',
-                },
-            ],
-        }
-    )
+        toast.error('failed lol')
     }
+    return []
 }
 
                     // modules:[
@@ -53,9 +43,6 @@ export interface SingleTermProps{
     name: string,
 }
 
-export interface TermProps{
-    terms: SingleTermProps[],
-}
 
 export function useTerms() {
   return useQuery({
