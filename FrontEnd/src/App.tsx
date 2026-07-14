@@ -14,7 +14,7 @@ function App() {
     <IdContext.Provider value={{ id, setId }}>
       <Toaster/>
       <main className='
-              h-[100vh] flex flex-col  sm:max-w-[40rem]
+              h-[100dvh] flex flex-col  sm:max-w-[40rem]
               md:max-w-[60rem] lg:max-w-full
               antialiased font-sans bg-zinc-400 text-white
               '>
