@@ -47,6 +47,7 @@ export interface SingleModuleProps{
     td: boolean,
     exam: boolean,
     cof: number,
+    id: string,
 }
 export interface ModuleProps{
     modules: SingleModuleProps[];

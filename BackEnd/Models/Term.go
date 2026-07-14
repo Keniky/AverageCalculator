@@ -7,7 +7,7 @@ type Term struct {
 }
 
 type Module struct {
-	ID     string
+	ID     string `json:"id"`
 	Name   string `json:"name"`
 	TD     bool   `json:"td"`
 	Exam   bool   `json:"exam"`

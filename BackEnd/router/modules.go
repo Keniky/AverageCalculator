@@ -22,7 +22,7 @@ func (m *ModuleHandler) getModules(w http.ResponseWriter, r *http.Request) {
 
 	fmt.Println(termId)
 	var modules []models.Module
-	rows, err := m.DB.Query("SELECT name, td, exam, coff FROM module WHERE termId = $1",
+	rows, err := m.DB.Query("SELECT name, td, exam, coff, id FROM module WHERE termId = $1",
 		termId)
 
 	if err != nil {
@@ -35,7 +35,7 @@ func (m *ModuleHandler) getModules(w http.ResponseWriter, r *http.Request) {
 	for rows.Next() {
 		var module models.Module
 
-		if err = rows.Scan(&module.Name, &module.TD, &module.Exam, &module.Coff); err != nil {
+		if err = rows.Scan(&module.Name, &module.TD, &module.Exam, &module.Coff, &module.ID); err != nil {
 			http.Error(w, "Internal Server error In Modules retrieve", http.StatusInternalServerError)
 			return
 		}

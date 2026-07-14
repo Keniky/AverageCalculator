@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react"
+import { useEffect, useId, useMemo, useState } from "react"
 import { AddTermPanelTextInput } from "./AddTermPanel-TextInput";
 import { AddTermPanelModuleInput } from "./AddTermPanel-ModuleInput";
 import { useMutateTerm, type SingleModuleProps } from "../../hooks/useTerms";
@@ -19,11 +19,6 @@ const AddTermPanel = ({setIsAddPanel}:AddTermPanelPros) => {
     }, [arrayOfModules]);
 
     
-    useEffect(() => {
-      console.log(arrayOfModules)
-    }, [arrayOfModules])
-
-
 
     async function submitForm(e: React.FormEvent<HTMLFormElement>){
         e.preventDefault()

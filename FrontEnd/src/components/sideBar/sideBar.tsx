@@ -1,12 +1,19 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTerms } from "../../hooks/useTerms"
 import SideBarTerm from "./sideBar-Term";
 import AddTermPanel from "../CustomPanels/AddTermPanel";
+import { useId } from "../../hooks/useId";
 
 const SideBar = () => {
 
     const [ isAddPanel, setIsAddPanel ] = useState(false);
     const {data : terms}= useTerms();
+    const {id, setId} = useId();
+
+    useEffect(() => {
+        if(terms?.length && terms?.[0].id && terms?.length > 0)
+            setId(terms?.[0].id)
+    }, [terms])
 
 
   return (
