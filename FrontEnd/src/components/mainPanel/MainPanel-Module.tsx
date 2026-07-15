@@ -11,18 +11,20 @@ const MainPanelModule = ({setModulesAvg, module}: AddTermPanelModuleInputProps) 
     const [td, setTd] = useState('0')
     const [exam, setExam] = useState('0')
  
-    useEffect(() => {   
-        const tdValue: number = parseFloat(td)
-        const examValue: number = parseFloat(exam)
-        const avg: number = (((tdValue * 0.4) + (examValue * 0.6)) * module.coff)
+    const tdValue: number = parseFloat(td)
+    const examValue: number = parseFloat(exam)
+    const avg: number = ((tdValue * 0.4) + (examValue * 0.6))
 
+    useEffect(() => {   
+        const total: number = avg * module.coff
         
         setModulesAvg((prev) => {
-            prev.set(module.id, avg);
+            prev.set(module.id, total);
             return new Map<string, number>(prev);
         })
         
     }, [td, exam])
+
 
    return (
     <div className="flex flex-row items-center my-6 mx-4 justify-center text-black font-bold">
@@ -99,6 +101,11 @@ const MainPanelModule = ({setModulesAvg, module}: AddTermPanelModuleInputProps) 
             }
         </div>
 
+      <div className='flex justify-center items-center pl-5'>
+        {
+          `${avg.toFixed(2)}`
+        }
+      </div>
 
     </div>
    ) 

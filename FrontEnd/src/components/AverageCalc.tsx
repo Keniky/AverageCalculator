@@ -74,7 +74,7 @@ const AverageCalc = () => {
 
       <div className='flex justify-center items-center'>
         {
-          `modules average is: ${realAverage}`
+          `modules average is: ${realAverage.toFixed(2)}`
         }
       </div>
     </section>
