@@ -1,4 +1,4 @@
-import { useEffect, useId, useMemo, useState } from "react"
+import { useMemo, useState } from "react"
 import { AddTermPanelTextInput } from "./AddTermPanel-TextInput";
 import { AddTermPanelModuleInput } from "./AddTermPanel-ModuleInput";
 import { useMutateTerm, type SingleModuleProps } from "../../hooks/useTerms";

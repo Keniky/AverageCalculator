@@ -16,6 +16,7 @@ export async function getModules(termId: string) : Promise<SingleModuleProps[]>{
         }
 
         const data = await response.json()
+        console.log(`server responded data ${data}`)
         return data;
     }catch{
         console.log('failed lol ')

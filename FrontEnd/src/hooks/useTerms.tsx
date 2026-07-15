@@ -46,7 +46,7 @@ export interface SingleModuleProps{
     name: string,
     td: boolean,
     exam: boolean,
-    cof: number,
+    coff: number,
     id: string,
 }
 export interface ModuleProps{

@@ -17,7 +17,7 @@ export function AddTermPanelModuleInput({setArrayOfModules}: AddTermPanelModuleI
         e.preventDefault()
 
         const cof = parseInt(coff)
-        const singleModule: SingleModuleProps = {name, td, exam, cof};
+        const singleModule: SingleModuleProps = {name, td, exam, coff:cof, id:'t'};
         setArrayOfModules(prev => {
             if(prev.length + 1 >= 8){
                 return prev
